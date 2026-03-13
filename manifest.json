@@ -3,7 +3,7 @@
   "short_name": "BK Juego",
   "description": "Juego educativo para adivinar mariposas costarricenses. De Butterfly Kingdom, Escazú.",
   "lang": "es",
-  "start_url": "butterflykingdomcr-juego1",
+  "start_url": "index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#e8f5e9",
