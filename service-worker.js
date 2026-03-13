@@ -4,8 +4,7 @@
    que quieras forzar una actualización
    ═══════════════════════════════════════════ */
 
-const CACHE_NAME = 'bk-game-v1';
-
+const CACHE_NAME = 'bk-game-v2';
 const SHELL = [
   'index.html',
   'manifest.json',
