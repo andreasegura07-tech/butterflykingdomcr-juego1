@@ -408,21 +408,19 @@ main {
 #install-banner {
   display: none;
   position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  right: 0;
   background: linear-gradient(135deg, #1b5e20, #0d47a1);
   color: white;
-  border-radius: 50px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   font-family: 'Fredoka One', cursive;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  z-index: 900;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  z-index: 2000;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  white-space: nowrap;
-  cursor: pointer;
 }
 #install-banner.show { display: flex; }
 #install-banner button {
@@ -609,7 +607,7 @@ const BUTTERFLIES = [
     id: 'monarca',
     name: 'Mariposa Monarca',
     scientific: 'Danaus plexippus',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Monarch_Butterfly_Showy.jpg/640px-Monarch_Butterfly_Showy.jpg',
+    img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Monarch_In_May.jpg/640px-Monarch_In_May.jpg',
     fact: 'Migra miles de kilómetros cada año. Su color naranja advierte a los depredadores que es tóxica, pues se alimenta de plantas con toxinas.',
     difficulty: 1
   },
