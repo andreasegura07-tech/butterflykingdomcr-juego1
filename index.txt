@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Butterfly Kingdom – Adivina la Mariposa</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#2e7d32">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+height:100dvh;
+overflow:hidden;
+font-family:'Nunito',sans-serif;
+background:#e8f5e9;
+display:flex;
+flex-direction:column
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#1b5e20,#0d47a1);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+padding:10px
+}
+
+header h1{
+font-family:'Fredoka One';
+font-size:1.2rem
+}
+
+/* MAIN */
+
+main{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:10px
+}
+
+/* CARD */
+
+.card{
+background:white;
+border-radius:20px;
+padding:16px;
+text-align:center;
+max-width:420px;
+width:100%;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+display:flex;
+flex-direction:column;
+gap:12px
+}
+
+h2{
+font-family:'Fredoka One';
+color:#2e7d32
+}
+
+.preview{
+display:flex;
+justify-content:center;
+gap:8px
+}
+
+.preview img{
+width:50px;
+height:50px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #4caf50
+}
+
+.rules{
+background:#e3f2fd;
+padding:10px;
+border-radius:12px;
+text-align:left;
+font-size:0.8rem
+}
+
+.rules ul{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:4px
+}
+
+button{
+background:linear-gradient(135deg,#2e7d32,#1b5e20);
+color:white;
+border:none;
+padding:12px;
+border-radius:40px;
+font-family:'Fredoka One';
+cursor:pointer
+}
+
+/* GAME */
+
+.game{
+display:none;
+flex-direction:column;
+gap:12px;
+align-items:center
+}
+
+.image{
+width:90vw;
+max-width:360px;
+height:28vh;
+border-radius:16px;
+overflow:hidden
+}
+
+.image img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.options{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+width:90vw;
+max-width:360px
+}
+
+.opt{
+padding:10px;
+border-radius:12px;
+border:2px solid #4caf50;
+background:white;
+font-weight:700;
+cursor:pointer
+}
+
+.opt:hover{
+background:#e8f5e9
+}
+
+.score{
+font-weight:800;
+color:#2e7d32
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>🦋 Butterfly Kingdom</h1>
+
+</header>
+
+<main>
+
+<div class="card" id="start">
+
+<h2>¡Adivina la Mariposa!</h2>
+
+<p>¿Reconocés las mariposas de Costa Rica?</p>
+
+<div class="preview">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/10/Morpho_menelaus.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Monarch_Butterfly.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Greta_oto.jpg">
+
+</div>
+
+<div class="rules">
+
+<ul>
+<li>🖼️ Se muestra una mariposa</li>
+<li>✅ Adiviná el nombre</li>
+<li>🔥 Sumá puntos</li>
+</ul>
+
+</div>
+
+<button onclick="startGame()">Empezar</button>
+
+</div>
+
+<div class="game" id="game">
+
+<div class="score">Puntos: <span id="score">0</span></div>
+
+<div class="image">
+<img id="butterfly">
+</div>
+
+<div class="options" id="options"></div>
+
+</div>
+
+</main>
+
+<script>
+
+const butterflies=[
+
+{
+name:"Morpho Azul",
+img:"https://upload.wikimedia.org/wikipedia/commons/1/10/Morpho_menelaus.jpg"
+},
+
+{
+name:"Monarca",
+img:"https://upload.wikimedia.org/wikipedia/commons/4/4c/Monarch_Butterfly.jpg"
+},
+
+{
+name:"Mariposa Cristal",
+img:"https://upload.wikimedia.org/wikipedia/commons/0/0b/Greta_oto.jpg"
+}
+
+]
+
+let score=0
+
+function startGame(){
+
+document.getElementById("start").style.display="none"
+document.getElementById("game").style.display="flex"
+
+next()
+
+}
+
+function next(){
+
+const b=butterflies[Math.floor(Math.random()*butterflies.length)]
+
+document.getElementById("butterfly").src=b.img
+
+const options=document.getElementById("options")
+
+options.innerHTML=""
+
+butterflies.forEach(o=>{
+
+const btn=document.createElement("button")
+
+btn.className="opt"
+
+btn.innerText=o.name
+
+btn.onclick=()=>{
+
+if(o.name===b.name){
+
+score+=10
+
+}else{
+
+score-=5
+
+}
+
+document.getElementById("score").innerText=score
+
+next()
+
+}
+
+options.appendChild(btn)
+
+})
+
+}
+
+/* registrar service worker */
+
+if('serviceWorker' in navigator){
+
+navigator.serviceWorker.register('service-worker.js')
+
+}
+
+</script>
+
+</body>
+</html>
